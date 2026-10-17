@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teacher Password Security</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #dbeafe, #dcfce7);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 35px;
+    border-radius: 16px;
+    max-width: 460px;
+    width: 90%;
+    box-shadow: 0 8px 25px #0002;
+    text-align: center;
+}
+
+h1 { color: #1e3a8a; }
+p { color: #475569; line-height: 1.6; }
+
+input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.strength-meter {
+    display: flex;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.segment {
+    flex: 1;
+    height: 14px;
+    border-radius: 5px;
+}
+
+.weak { background: #facc15; }
+.fair { background: #f59e0b; }
+.good { background: #84cc16; }
+.strong { background: #16a34a; }
+
+.scale-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #475569;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+button:hover { background: #1d4ed8; }
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #0009;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.modal-content {
+    background: white;
+    padding: 28px;
+    border-radius: 14px;
+    max-width: 480px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.warning {
+    color: #b91c1c;
+    text-align: center;
+}
+
+li {
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🔐 Password Security Checker</h1>
+    <p>How strong is your school account password?</p>
+    <p>Explore our password security awareness demonstration.</p>
+
+<input type="password"
+       id="password"
+       placeholder="Type a fake password"
+       autocomplete="off"
+       spellcheck="false"
+       onkeydown="if(event.key === 'Enter') checkPassword()">
+
+<p style="font-size:13px; color:#64748b;">
+    Training exercise only. Never enter a real password.
+</p>
+
+    <div class="strength-meter" aria-label="Illustrative strength scale">
+        <div class="segment weak"></div>
+        <div class="segment fair"></div>
+        <div class="segment good"></div>
+        <div class="segment strong"></div>
+    </div>
+
+    <div class="scale-labels">
+        <span>Weak</span>
+        <span>Strong</span>
+    </div>
+
+   <button onclick="checkPassword()">Rate My Password</button>
+</div>
+
+<div class="modal" id="warningModal"
+     role="dialog" aria-modal="true"
+     aria-labelledby="warningTitle">
+    <div class="modal-content">
+
+        <h2 class="warning" id="warningTitle">
+            ⚠️ Cybersecurity Warning!
+        </h2>
+
+        <p><strong>Think before you type!</strong></p>
+
+        <p>
+            Never enter your real password into an unknown
+            or untrusted website, including online password
+            strength checkers.
+        </p>
+
+        <h3>4 Tips for Creating Secure Passwords</h3>
+        <ol>
+            <li><strong>Use long passwords:</strong>
+                Aim for at least 15 characters.
+                A memorable passphrase is a good option.</li>
+
+            <li><strong>Use unique passwords:</strong>
+                Never reuse school passwords on
+                personal accounts.</li>
+
+            <li><strong>Use a password manager:</strong>
+                Choose one approved by your school's
+                IT department.</li>
+
+            <li><strong>Enable MFA:</strong>
+                Add multi-factor authentication
+                whenever available.</li>
+        </ol>
+
+        <p><strong>Remember:</strong>
+            This website does not collect or analyze passwords.
+        </p>
+
+        <button onclick="closeWarning()">I Understand</button>
+    </div>
+</div>
+
+<script>
+
+function checkPassword() {
+    const passwordField = document.getElementById("password");
+
+    if (passwordField.value.trim() === "") {
+        alert("Please enter a made-up practice password.");
+        return;
+    }
+
+    // Clear the practice password immediately.
+    passwordField.value = "";
+
+    // Display the cybersecurity warning.
+    document.getElementById("warningModal").style.display = "flex";
+}
+
+function closeWarning() {
+    document.getElementById("warningModal").style.display = "none";
+}</script>
+
+</body>
+</html>
